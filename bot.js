@@ -1,3 +1,5 @@
+'use strict';
+
 // Create the configuration
 var config = {
 	channels: ["#orbitdelmundo"],
@@ -5,29 +7,20 @@ var config = {
 	botName: "robotnik"
 };
 
-
-
 // Get the lib
 var irc = require("irc");
+var handler = require('./CommandHandler').handler;
 
 // Create the bot name
 var bot = new irc.Client(config.server, config.botName, {
 	channels: config.channels
 });
+handler.init(bot);
 
 // Listen for joins
 bot.addListener("join", function(channel, who) {
 	// Welcome them in!
-	bot.say(channel, who + "...dude...welcome back!");
+	bot.say(channel, 'Welcome ' + channel + ' - ' + who + ' is here to help');
 });
 
-// Listen for any message, PM said user when he posts
-bot.addListener("message", function(from, to, text, message) {
-	bot.say(from, "¿Que?");
-});
-
-// Listen for any message, say to him/her in the room
-bot.addListener("message", function(from, to, text, message) {
-	bot.say(config.channels[0], "¿Public que?");
-});
 
