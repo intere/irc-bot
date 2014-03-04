@@ -1,0 +1,19 @@
+{
+  "name": "irc-bot",
+  "version": "0.0.1",
+  "description": "IRC Bot",
+  "main": "bot.js",
+  "dependencies": {
+    "irc": "~0.3.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "irc",
+    "bot"
+  ],
+  "author": "Eric Internicola",
+  "license": "BSD-2-Clause"
+}
