@@ -33,19 +33,31 @@ var CommandHandler = function(bot) {
 			// bot.say(config.channels[0], "What does that mean: '" + text + "' ?");
 
 			var command = _helper.getCommand(text);
+			var args = _helper.getParams(text);
+			
 			if(typeof command !== 'undefined') {
-				bot.say(to, 'you want me to ' + command + '?');
+
+				// bot.say(to, 'Dude, you want me to ' + command + ', yo?');
+				if(command==='count') {
+
+					bot.say(to, 'Dude, I can count to ' + args[1] + ' yo.');
+					for(var i=0; i<args[1];i++) {
+						bot.say(to, '' + (i+1));
+					}
+				} else {
+					bot.say(to, 'Dude, you want me to ' + command + ', yo?');
+				}
 			} else {
 				console.log('no command');
 			}
-
 		},
 
 		// What do do when someone PMs me:
 		handlePrivateMessage: function(from, message) {
-			bot.say(from, 'Dude, I\'m a bot');
+			bot.say(from, 'Dude, I\'m a bot, yo');
 		},
 
+		/** Gets you the command.  */
 		getCommand: function(text) {
 
 			var parts = text.split(' ');
@@ -54,7 +66,14 @@ var CommandHandler = function(bot) {
 					return parts[0].substring(1);
 				}
 			}
+		},
 
+		/** Gets you the parameters for the command.  */
+		getParams: function(text) {
+			var parts = text.split(' ');
+			if(typeof(parts) !== 'undefined') {
+				return parts.slice(1);
+			}
 		}
 	};
 
